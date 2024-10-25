@@ -9,7 +9,7 @@ terraform {
 
 provider "aws" {
   # Configuration options
-  shared_credentials_files = ["$HOME/.aws/credentials"]
-  profile                  = "vscode"
-  region                   = "ap-south-2"
+  #shared_credentials_files = ["$HOME/.aws/credentials"]
+  #profile                  = "vscode"
+  region = "ap-south-2"
 }

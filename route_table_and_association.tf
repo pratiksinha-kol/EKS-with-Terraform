@@ -1,4 +1,4 @@
-resource "aws_route_table" "eks_route_table" {
+resource "aws_route_table" "eks_public_route_table" {
   vpc_id = aws_vpc.eks_vpc.id
 
   route {
@@ -7,12 +7,25 @@ resource "aws_route_table" "eks_route_table" {
   }
 
   tags = {
-    Name = "eks-route-table"
+    Name = "eks-public-route-table"
+  }
+}
+
+resource "aws_route_table" "eks_private_route_table" {
+  vpc_id = aws_vpc.eks_vpc.id
+  tags = {
+    Name = "eks-private-route-table"
   }
 }
 
 resource "aws_route_table_association" "a" {
   count          = 3
-  subnet_id      = aws_subnet.eks_subnet[count.index].id
-  route_table_id = aws_route_table.eks_route_table.id
+  subnet_id      = aws_subnet.public_eks_subnet[count.index].id
+  route_table_id = aws_route_table.eks_public_route_table.id
+}
+
+resource "aws_route_table_association" "b" {
+  count          = 3
+  subnet_id      = aws_subnet.private_eks_subnet[count.index].id
+  route_table_id = aws_route_table.eks_private_route_table.id
 }

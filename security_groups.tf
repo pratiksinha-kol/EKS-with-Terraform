@@ -89,7 +89,7 @@
 
 ######################################################################################
 
-resource "aws_security_group" "cluster_sg" {
+resource "aws_security_group" "eks-cluster_sg" {
   name        = "Cluster Security Group"
   description = "Cluster Security Group"
   vpc_id      = aws_vpc.eks_vpc.id
@@ -101,7 +101,7 @@ resource "aws_security_group" "cluster_sg" {
 ## Outbound Traffic open for all 
 
 resource "aws_vpc_security_group_egress_rule" "all_outbound_cluster" {
-  security_group_id = aws_security_group.cluster_sg.id
+  security_group_id = aws_security_group.eks-cluster_sg.id
 
   cidr_ipv4   = "0.0.0.0/0"
   from_port   = 0
