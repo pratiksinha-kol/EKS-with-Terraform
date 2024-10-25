@@ -44,7 +44,23 @@ Ensure that **`Terraform`**, **`kubectl`**, and **`AWS CLI`** are installed on y
     terraform destroy --auto-approve
     ```    
 
-_Additionally, if you want to create **[RBAC](RBAC/)** policies, you can check the given hyperlink out._
+## Setting Up RBAC for your newly created EKS CLuster
+
+_Additionally, if you want to create **[RBAC](RBAC/)** policies, you can check the given hyperlink out. To know more about token, read the [file](RBAC/Generate_Token.txt) provided_
+
+
+```sh
+kubectl create namespace webapps
+kubectl apply -f serviceaccount.yaml
+kubectl apply -f role.yaml
+kubectl apply -f rolebinding.yaml
+kubectl apply -f serviceaccounttoken.yaml
+```
+
+**Command To fetch the token, the name will be available after executing the `serviceaccounttoken.yaml` file**
+```sh
+kubectl describe secret mysecretname
+```
 
 ---
 
